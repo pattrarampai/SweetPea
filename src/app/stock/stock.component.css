@@ -1,0 +1,31 @@
+table {
+    width: 100%;
+}
+
+/* button {
+    margin: 16px 8px;
+} */
+
+/* ::ng-deep .mat-grid-list.create-table .mat-grid-tile .mat-figure {
+    justify-content: flex-start !important ;
+    align-items: flex-start !important;
+} */
+
+/* .button-row {
+    display: table-cell;
+    width: 490px;
+} */
+
+.scroll-bar {
+    overflow-x: scroll; 
+    height: 100%; 
+    width: 100%;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    width: 15%;
+}
+
+/* mat-form-field {
+    width: 150px;
+} */

@@ -1,0 +1,18 @@
+<mat-card class="example-card-dialog">
+    <mat-card-content>{{data.flowername}}</mat-card-content>
+    <p>ขนาด : {{data.flowersize}}</p> 
+    <p>ราคาขาย : {{data.flowerprice}} </p>
+    <img mat-card-image src={{data.imagespath}} alt="img">
+    <mat-card-content>
+      <p>จำนวนช่อ</p>
+    </mat-card-content>
+    <mat-form-field>
+        <mat-label>{{data.flowerunit}}</mat-label>
+        <input matInput [formControl]="quantity">
+    </mat-form-field>
+    <mat-card-actions>
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" (click)="replaceFlower()">เพิ่ม</button>
+        </div>
+    </mat-card-actions>
+  </mat-card>

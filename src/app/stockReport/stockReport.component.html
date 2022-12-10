@@ -1,0 +1,133 @@
+<div class="main-div">
+
+    <h1 mat-dialog-title>รายงานดอกไม้เหลือทิ้ง</h1>
+    <form [formGroup]="stockReportForm" (ngSubmit)="searchStockReport()">  
+        <mat-form-field appearance="fill">
+            <mat-label>ดอกไม้</mat-label>
+            <mat-select type="text" formControlName="flower">
+              <mat-option *ngFor="let flower of flower" [value]="flower.flowerCategory">
+                {{flower.flowerCategory}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- <mat-form-field appearance="fill">
+            <mat-label>เดือน</mat-label>
+            <mat-select type="text" formControlName="month">
+              <mat-option *ngFor="let m of month" [value]="m.value">
+                {{m.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+          <mat-form-field appearance="fill">
+            <mat-label>เดือน และ ปี</mat-label>
+            <input matInput [matDatepicker]="dp" [formControl]="date" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp
+                            startView="multi-year"
+                            (yearSelected)="chosenYearHandler($event)"
+                            (monthSelected)="chosenMonthHandler($event, dp)"
+                            panelClass="example-month-picker">
+            </mat-datepicker>
+          </mat-form-field>
+          <br>
+          <button mat-stroked-button type="submit">Search </button>
+
+          <div class="searchResult">
+  
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+                <!-- No. Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    
+                </ng-container>
+    
+                <!-- ReceiverDateTime Column -->
+                <ng-container matColumnDef="flower">
+                    <th mat-header-cell *matHeaderCellDef> ดอกไม้ </th>
+                    <td mat-cell *matCellDef="let element"> {{element.flower.flowerName}} </td>
+    
+                </ng-container>
+
+                  <!-- florist Column -->
+                  <ng-container matColumnDef="florist">
+                    <th mat-header-cell *matHeaderCellDef> ช่าง </th>
+                    <td mat-cell *matCellDef="let element"> {{element.florist.name}} </td>
+                </ng-container>
+    
+                <!-- Lot Column -->
+                <!-- <ng-container matColumnDef="lot">
+                    <th mat-header-cell *matHeaderCellDef>ล็อต</th>
+                    <td mat-cell *matCellDef="let element"> {{element.lot | date:'yyyy-MM-dd'}} </td>
+                </ng-container> -->
+    
+        
+    
+                      <!-- expire Column -->
+                      <!-- <ng-container matColumnDef="expireDate">
+                        <th mat-header-cell *matHeaderCellDef>วันหมดอายุ</th>
+                       <td mat-cell *matCellDef="let element"> {{ element.expireDate | date:'yyyy-MM-dd'}} </td> -->
+                       <!--   <td mat-cell *matCellDef="let element"> {{ element.expireDate}} </td>
+                    </ng-container> -->
+
+                      <!-- DeliveryDateTime Column
+                <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef> จำนวนคงเหลือ </th>
+                    <td mat-cell *matCellDef="let element"> {{element.quantity}} </td> 
+    
+                </ng-container>-->
+    
+                <!-- CustomerName Column -->
+                <ng-container matColumnDef="unit">
+                    <th mat-header-cell *matHeaderCellDef> หน่วย </th>
+                    <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
+    
+                </ng-container>
+
+                       <!-- inPromotionQty Column -->
+                <ng-container matColumnDef="inPromotionQty">
+                    <th mat-header-cell *matHeaderCellDef> ทำโปรโมชั่น </th>
+                    <td mat-cell *matCellDef="let element"> {{element.inPromotionQty}} </td>
+                </ng-container>
+
+
+                      <!-- inPromotionQty Column -->
+                      <ng-container matColumnDef="inPromotionSoldQty">
+                        <th mat-header-cell *matHeaderCellDef> ขายจากโปรโมชั่น </th>
+                        <td mat-cell *matCellDef="let element"> {{element.inPromotionSoldQty}} </td>
+                    </ng-container>
+
+                           <!-- inPromotionQty Column -->
+                           <ng-container matColumnDef="waste">
+                            <th mat-header-cell *matHeaderCellDef> เหลือทิ้ง </th>
+                            <td mat-cell *matCellDef="let element"> {{element.waste}} </td>
+                        </ng-container>
+
+        
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+            </table>
+    
+            <!-- <mat-form-field appearance="fill">
+                <mat-label>รวมยอดขาย</mat-label>
+                <input matInput [value]="totalAmount" formControlName="totalAmount">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>รวมต้นทุน</mat-label>
+                <input matInput [value]="totalCost" formControlName="totalCost">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>รวมกำไร</mat-label>
+                <input matInput [value]="totalProfit" formControlName="totalProfit">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>รวมค่าช่าง</mat-label>
+                <input matInput [value]="totalFloristFee" formControlName="totalFloristFee">
+              </mat-form-field> -->
+            </div>
+    </form>
+</div>

@@ -1,0 +1,191 @@
+<p></p>
+
+<!-- <script
+src=src="http://maps.google.com/maps/api/js?key=AIzaSyB_0D0m6Sc8trPtnSkxF_f_FI0Sk-qXTNI"
+async
+></script> -->
+
+
+<form [formGroup]="searchFlowerForm" (ngSubmit)="searchForm()">
+  <div class="main-div">
+    <mat-card> ค้นหาข้อมูลช่อดอกไม้
+      <br>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>ประเภทดอกไม้</mat-label>
+        <mat-select type="text" formControlName="flowerCat">
+          <mat-option *ngFor="let flowerCat of flowerCat" [value]="flowerCat.viewValue">
+            {{flowerCat.viewValue}}
+          </mat-option>
+        </mat-select>
+
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>ดอกไม้</mat-label>
+        <mat-select type="text" formControlName="name">
+          <mat-option *ngFor="let flower of flower" [value]="flower.flowerCategory">
+            {{flower.flowerCategory}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>โอกาส</mat-label>
+        <mat-select type="text" formControlName="occasion">
+          <mat-option value=""></mat-option>
+          <mat-option value="Birthday">Birthday</mat-option>
+          <mat-option value="Congratulations">Congratulations</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>โทนสี</mat-label>
+        <mat-select formControlName="color">
+          <mat-option value=""> </mat-option>
+          <mat-option value="ขาว">ขาว</mat-option>
+          <mat-option value="ชมพู">ชมพู</mat-option>
+          <mat-option value="เหลือง">เหลือง</mat-option>
+          <mat-option value="พาสเทล">พาสเทล</mat-option>
+          <mat-option value="ฟ้า">ฟ้า</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!--<mat-form-field appearance="fill">
+        <mat-label>Formula</mat-label>
+        <mat-select>
+          <mat-option value="one">กุหลาบขาว จีน ยูคาลิปตัส size S</mat-option>
+          <mat-option value="two">กุหลาบแดง จีน ยูคาลิปตัส size M</mat-option>
+        </mat-select>
+      </mat-form-field>
+-->
+      <mat-form-field appearance="fill">
+        <mat-label>วันที่ใช้งาน</mat-label>
+        <input matInput [matDatepicker]="availableDate" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="availableDate"></mat-datepicker-toggle>
+        <mat-datepicker #availableDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>รูปแบบ</mat-label>
+        <mat-select type="text" formControlName="pattern">
+          <mat-option *ngFor="let pattern of pattern" [value]="pattern.viewValue">
+            {{pattern.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>ช่าง</mat-label>
+        <mat-select type="text" formControlName="florist">
+          <mat-option *ngFor="let florist of florist" [value]="florist.viewValue">
+            {{florist.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>จำนวนช่อที่ต้องการ</mat-label>
+        <input matInput value="4" formControlName="quantity">
+      </mat-form-field>
+
+      <br>
+      <br>
+      <mat-label>ช่วงราคา</mat-label>
+      <mat-form-field appearance="fill">
+
+        <mat-label>เริ่มต้น</mat-label>
+        <input matInput value="550" formControlName="priceFrom">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>ถึง</mat-label>
+        <input matInput value="1000" formControlName="priceTo">
+
+      </mat-form-field>
+      <mat-label>บาท</mat-label>
+
+    </mat-card>
+    <mat-card>ข้อมูลการจัดส่ง
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>พื้นที่จัดส่ง</mat-label>
+        <input matInput value="ตลาดน้อย เขตสัมพันธวงศ์ กทม" formControlName="address">
+      </mat-form-field>
+      <br>
+    </mat-card>
+    <button mat-stroked-button type="submit">Search </button>
+  </div>
+</form>
+
+<table mat-table [dataSource]="dataSource">
+  <mat-form-field appearance="fill">
+    <mat-label>Delivery Fee</mat-label>
+    <input matInput value="150">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Total Price</mat-label>
+    <input matInput value="700">
+  </mat-form-field>
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> สูตรดอกไม้ </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="quantityAvailable">
+    <th mat-header-cell *matHeaderCellDef> จำนวนที่ทำได้ </th>
+    <td mat-cell *matCellDef="let element"> {{element.quantityAvailable}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="pattern">
+    <th mat-header-cell *matHeaderCellDef> รูปแบบ </th>
+    <td mat-cell *matCellDef="let element"> {{element.pattern}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="color">
+    <th mat-header-cell *matHeaderCellDef> โทนสี </th>
+    <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="size">
+    <th mat-header-cell *matHeaderCellDef>ขนาด</th>
+    <td mat-cell *matCellDef="let element"> {{element.size}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="occasion">
+    <th mat-header-cell *matHeaderCellDef> โอกาส </th>
+    <td mat-cell *matCellDef="let element"> {{element.occasion}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="florist">
+    <th mat-header-cell *matHeaderCellDef> ช่าง </th>
+    <td mat-cell *matCellDef="let element"> {{element.florist}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> ราคา</th>
+    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+  </ng-container>
+  <ng-container matColumnDef="deliveryFee">
+    <th mat-header-cell *matHeaderCellDef> ค่าส่ง </th>
+    <td mat-cell *matCellDef="let element"> {{element.deliveryFee}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="totalPrice">
+    <th mat-header-cell *matHeaderCellDef> ราคารวม </th>
+    <td mat-cell *matCellDef="let element"> {{element.totalPrice}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

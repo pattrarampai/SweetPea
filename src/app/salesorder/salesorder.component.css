@@ -1,0 +1,49 @@
+table {
+    width: 100%;
+}
+
+button {
+    margin: 16px 8px;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+::ng-deep .mat-grid-list.create-table .mat-grid-tile .mat-figure {
+    justify-content: flex-start !important ;
+    align-items: flex-start !important;
+}
+
+.button-row {
+    display: table-cell;
+    width: 490px;
+}
+
+.scroll-bar {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+    width: 15%;
+}
+
+.center {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
+
+th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color:#333d71;
+    color: white;
+}

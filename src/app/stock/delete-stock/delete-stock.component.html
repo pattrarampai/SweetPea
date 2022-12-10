@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>ตัดสต๊อก</h1>
+
+<form fxLayout=column [formGroup]="formDeleteStock" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+        <div formArrayName="stockInfo">
+            <div *ngFor="let data of arr; let i=index">
+                <div [formGroupName]="i">
+                    <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+                        <input matInput type="text" hidden formControlName="flowerId">
+                        <mat-form-field fxFlex="35%">
+                            <input [readonly]="true" matInput type="text" placeholder="ชื่อดอกไม้" formControlName="flowerName">
+                        </mat-form-field>
+        
+                        <mat-form-field fxFlex="20%">
+                            <input matInput type="number" placeholder="จำนวนที่ต้องการตัด" formControlName="deleteQuantity">
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="20%">
+                            <input [readonly]="true" matInput type="text" placeholder="จำนวนที่มีอยู่ในสต๊อก" formControlName="remainQuantity">
+                        </mat-form-field>
+                        
+                        <button (click)="removeRow(i)" mat-button color="warn">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button type="submit" [disabled]="!formDeleteStock.valid" color="primary">บันทึก</button>
+        <button mat-raised-button type="button" (click)="closeDialog()" color="warn">ยกเลิก</button>
+    </div>
+</form>

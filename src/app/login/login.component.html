@@ -1,0 +1,27 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+        <mat-card-header>
+            <mat-card-title>Log in</mat-card-title>
+        </mat-card-header>
+    
+        <!-- <form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()"> -->
+        <form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-card-content>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Username" formControlName="username" required>
+                <mat-error *ngIf="isFieldInvalid('username')">
+                    Please fill username
+                </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password" type="password" formControlName="password" required>
+                <mat-error *ngIf="isFieldInvalid('password')">
+                    Please fill password
+                </mat-error>
+            </mat-form-field>
+            </mat-card-content>
+            <button mat-stroked-button color="accent" class="btn-block" type="submit">Log in</button>
+        </form>
+    </mat-card>
+</div>

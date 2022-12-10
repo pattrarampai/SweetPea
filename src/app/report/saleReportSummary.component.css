@@ -1,0 +1,15 @@
+
+  .mat-table {
+    max-width: 900px;
+    width: 100%;
+    margin: 20px;
+    }
+
+    ::ng-deep .mat-grid-list.create-table .mat-grid-tile .mat-figure {
+        justify-content: flex-start !important ;
+        align-items: flex-start !important;
+    }
+
+    .mat-form-field {
+      margin: 30px;
+    }

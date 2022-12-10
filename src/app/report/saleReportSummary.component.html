@@ -1,0 +1,63 @@
+
+
+    <h1 mat-dialog-title>รายงานสรุปยอดขายประจำปี</h1>
+
+<div class="chart-wrapper">
+  <mat-form-field appearance="fill">
+    <mat-label>เดือน และ ปี</mat-label>
+    <input matInput [matDatepicker]="dp" [formControl]="date">
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp
+                    startView="multi-year"
+                    (yearSelected)="chosenYearHandler($event,dp)">
+                    <!-- panelClass="example-month-picker"> -->
+    </mat-datepicker>
+  </mat-form-field>
+  
+  <canvas baseChart 
+  [datasets]="barChartData"
+  [labels]="barChartLabels"
+  [options]="barChartOptions"
+  [plugins]="barChartPlugins"
+  [legend]="barChartLegend"
+  [chartType]="barChartType"
+  (chartClick)="selectDatabyMonth($event)"
+  >
+</canvas>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- No. Column -->
+  <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+
+  </ng-container>
+
+  <!-- FlowerFormula Column -->
+  <ng-container matColumnDef="formulaName">
+      <th mat-header-cell *matHeaderCellDef> สูตรดอกไม้ </th>
+      <td mat-cell *matCellDef="let element"> {{element.formulaName}} </td>
+  </ng-container>
+
+   <!-- FlowerFormula Column -->
+   <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef> จำนวน</th>
+    <td mat-cell *matCellDef="let element"> 
+      {{element.quantity}}
+    </td>
+</ng-container>
+
+    <!-- price Column -->
+    <ng-container matColumnDef="totalPrice">
+      <th mat-header-cell *matHeaderCellDef> จำนวนเงิน </th>
+      <td mat-cell *matCellDef="let element"> {{element.totalPrice}} </td>   
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+
+

@@ -1,0 +1,68 @@
+<div mat-dialog-content>
+  <div>
+    <p>ชื่อดอกไม้</p>
+    <mat-form-field>
+      <input matInput>
+    </mat-form-field>
+  </div>
+  
+  <div>
+    <p>ประเภทดอกไม้</p>
+    <mat-form-field appearance="fill">
+      <mat-label>ประเภทดอกไม้</mat-label>
+      <mat-select>
+        <mat-option value="one">ดอกไม้หลัก</mat-option>
+        <mat-option value="two">ดอกไม้รอง</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="checked">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+          <mat-checkbox [(ngModel)]="element.checked"></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> ลำดับ </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+      </ng-container>
+  
+      <!-- flowername Column -->
+      <ng-container matColumnDef="flowername">
+        <mat-header-cell *matHeaderCellDef> ช่อดอกไม้ </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.flowername}} </mat-cell>
+      </ng-container>
+  
+      <!-- stock Column -->
+      <ng-container matColumnDef="stock">
+        <mat-header-cell *matHeaderCellDef> สินค้าคงเหลือ </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.stock}} </mat-cell>
+      </ng-container>
+  
+      <!-- unit Column -->
+      <ng-container matColumnDef="unit">
+        <mat-header-cell *matHeaderCellDef> หน่วยนับ </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.unit}} </mat-cell>
+      </ng-container>
+
+      <!-- location Column -->
+      <ng-container matColumnDef="location">
+        <mat-header-cell *matHeaderCellDef> สถานที่ </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.location}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}" (click)="row.highlighted = !row.highlighted" (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+    </mat-table>
+  </div>
+</div>
+<div mat-dialog-actions>
+ <button mat-button mat-raised-button color="primary" (click)="onNoClick()">เพิ่มโปรโมชั่น</button>
+</div>

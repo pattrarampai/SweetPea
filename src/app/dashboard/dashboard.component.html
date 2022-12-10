@@ -1,0 +1,58 @@
+<div class="content">
+    <div class="row">
+        <div class="col-md-8">
+            <mat-card class="main-card">
+                <mat-card-header class="main-header">
+                    <mat-card-title class="main-title">โปรโมชั่นปัจจุบัน</mat-card-title>
+                </mat-card-header>
+                <div fxLayout="row wrap" fxLayoutGap="5px grid">
+                    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="25%" *ngFor="let promotionDetail of promotionDetails">
+                        <!-- <mat-card class="mat-elevation-z4" > -->
+                        <mat-card class="example-card" >
+                            <mat-card-header>
+                                <mat-card-title>{{promotionDetail.flowerFormula.name}}</mat-card-title>
+                            </mat-card-header>
+                            <img class="main-image" mat-card-image src={{promotionDetail.flowerFormula.imagePath}}>
+                            <mat-card-content>
+                                <div>ราคา: {{promotionDetail.price}} บาท</div>
+                                <div>จำนวน: {{promotionDetail.quantity}} ช่อ</div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>  
+                <mat-card-actions align="end">
+                    <div class="button-row">
+                        <button mat-raised-button color="primary" routerLink="/promotion">
+                            แก้ไข
+                        </button>
+                    </div>
+                </mat-card-actions> 
+            </mat-card> 
+        </div>
+        <div class="col-md-4">
+            <mat-card class="main-card">
+                <mat-card-header class="main-header">
+                    <mat-card-title class="main-title">โปรโมชั่นแนะนำ</mat-card-title>
+                </mat-card-header>
+                <div class="main-image-list">
+                    <div class="image-list" fxLayout="row">
+                        <ng-container *ngFor="let promotionDetailLog of promotionDetailLogs">
+                            <div class="image-list__item">
+                            <div fxFlexFill class="image-list-item">
+                                <img fxFlexFill class="image-list-item__image" src={{promotionDetailLog.flowerFormula.imagePath}} />
+                            </div>
+                        </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <mat-card-actions align="end">
+                    <div class="button-row">
+                        <button mat-raised-button color="primary" routerLink="/promotion">
+                            แสดงเพิ่มเติม
+                        </button>
+                    </div>
+                </mat-card-actions> 
+            </mat-card> 
+        </div>
+    </div>
+</div>

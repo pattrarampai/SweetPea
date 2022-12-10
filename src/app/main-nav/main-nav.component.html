@@ -1,0 +1,31 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="false" [ngClass]="{ hidden: !(isHandset$ | async) }"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
+    <mat-toolbar color="primary">SweetPeaTimes</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLinkActive="active" routerLink="/">หน้าหลัก</a>
+      <a mat-list-item routerLinkActive="active" routerLink="/searchflower">ค้นหาข้อมูลช่อดอกไม้</a>
+      <a mat-list-item routerLinkActive="active" routerLink="/createSalesorder">สร้างออเดอร์</a>
+      <a mat-list-item routerLinkActive="active" routerLink="/salesorder">ค้นหาและแก้ไขออเดอร์</a>
+      <a mat-list-item routerLinkActive="active" routerLink="/promotion">โปรโมชั่น</a>
+      <a mat-list-item routerLinkActive="active" routerLink="/stock">จัดการสต๊อก</a>
+      <a mat-list-item routerLinkActive="active" routerLink="/report" *ngIf="isAdmin">รายงานยอดขาย</a>
+      <a mat-list-item routerLinkActive="active" routerLink="/promotionReport" *ngIf="isAdmin">รายงานยอดขายจากโปรโมชั่น</a>
+      <a mat-list-item routerLinkActive="active" routerLink="/stockReport" *ngIf="isAdmin">รายงานดอกไม้เหลือทิ้ง</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <div class="user">สวัสดี, {{username}}</div>
+      <span class="spacer"></span>
+      <a mat-button (click)="onLogout()"><b>ออกจากระบบ</b></a>
+      <!-- <span>SweetPeaTimes</span> -->
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

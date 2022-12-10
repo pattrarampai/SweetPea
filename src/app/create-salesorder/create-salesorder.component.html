@@ -1,0 +1,217 @@
+<mat-grid-list cols="12" rowHeight="100px">
+    <mat-grid-tile colspan="2">สร้างออเดอร์</mat-grid-tile>
+    <mat-grid-tile colspan="10"></mat-grid-tile>
+</mat-grid-list>
+
+<form [formGroup]="salesOrderForm" (ngSubmit)="onSubmit()">
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+
+            <div class="col">
+                <span>ข้อมูลผู้สั่ง</span>
+            </div>
+            <div class="col-10">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-3">
+                        <mat-form-field class="create-form-full-width" appearance="fill">
+                            <mat-label>ชื่อ</mat-label>
+                            <input matInput type="text" formControlName="customerName">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <mat-form-field class="create-form-full-width" appearance="fill">
+                            <mat-label>เบอร์โทรศัพท์</mat-label>
+                            <input matInput type="text" placeholder="0811111111" formControlName="customerPhone">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <mat-form-field class="create-form-full-width" appearance="fill">
+                            <mat-label>Line / FB</mat-label>
+                            <input matInput type="text" formControlName="customerLineFb">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <mat-form-field appearance="fill" class="date-picker-form-fill">
+                            <mat-label>วันที่สั่ง</mat-label>
+                            <input matInput [matDatepicker]="datepicker1" placeholder="02/15/2021" type="text"
+                                formControlName="date">
+                            <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
+                            <mat-datepicker #datepicker1>
+                                <mat-datepicker-actions>
+                                    <button mat-button matDatepickerCancel>Cancel</button>
+                                    <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                                </mat-datepicker-actions>
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+
+            <div class="col">
+                <span>ข้อมูลผู้รับ</span>
+            </div>
+            <div class="col-10"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-3">
+                        <mat-form-field class="create-form-full-width" appearance="fill">
+                            <mat-label>ชื่อ</mat-label>
+                            <input matInput type="text" formControlName="receiverName">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <mat-form-field class="create-form-full-width" appearance="fill">
+                            <mat-label>เบอร์โทรศัพท์</mat-label>
+                            <input matInput type="text" placeholder="0811111111" formControlName="receiverPhone">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <mat-form-field class="create-form-full-width" appearance="fill">
+                            <mat-label>ที่อยู่ผู้รับ</mat-label>
+                            <input matInput type="text" placeholder="123 abc" formControlName="receiverAddress" (change)="getPrice()">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <mat-form-field appearance="fill" class="date-picker-form-fill">
+                            <mat-label>วันที่รับ</mat-label>
+                            <input matInput [matDatepicker]="datepicker2" placeholder="2021-02-15" type="text"
+                                formControlName="receiveDateTime" (dateChange)="receiveDateChange()">
+                            <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+                            <mat-datepicker #datepicker2>
+                                <mat-datepicker-actions>
+                                    <button mat-button matDatepickerCancel>Cancel</button>
+                                    <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                                </mat-datepicker-actions>
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-2">
+                <span>รายละเอียดออเดอร์</span>
+            </div>
+            <div class="col-9"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-3">
+                        <mat-form-field appearance="fill">
+                            <mat-label>ช่างจัดดอกไม้</mat-label>
+                            <mat-select type="text" formControlName="florist" (selectionChange)="floristChange()">
+                                <mat-option *ngFor="let florist of florists" [value]="florist.id">
+                                    {{florist.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div formArrayName="flowerMultipleDtoList">
+                    <div *ngFor="let data of arr; let i=index">
+                        <div [formGroupName]="i">
+                            <div class="row">
+                                <div class="col-3">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>สูตรดอกไม้</mat-label>
+                                        <mat-select type="text" formControlName="flowerFormula" (selectionChange)="formulaChange(i)">
+                                            <mat-option *ngFor="let flowerFormula of flowerFormulas"
+                                                [value]="flowerFormula.id">
+                                                {{flowerFormula.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-3">
+                                    <mat-form-field class="create-form-full-width" appearance="fill">
+                                        <mat-label>จำนวน</mat-label>
+                                        <input matInput type="text" formControlName="orderTotal" (change)="orderTotalChange(i)">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-3">
+                                    <mat-form-field class="create-form-full-width" appearance="fill">
+                                        <mat-label>จำนวนช่อดอกไม้ที่สามารถทำได้</mat-label>
+                                        <input [readonly]=true matInput type="text" formControlName="flowerAvailable">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <div class="button-row">
+                                        <button mat-raised-button color="primary" (click)="addFlowerMultipleForm()" type="button">
+                                            <mat-icon>add</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="col">
+                                    <button type="button" mat-raised-button color="warn" (click)="removeFlowerMultiple(i)">
+                                        <mat-icon aria-hidden="false">clear</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <mat-form-field class="create-form-full-width" appearance="fill">
+                            <mat-label>ราคาช่อดอกไม้</mat-label>
+                            <input matInput type="text" formControlName="flowerPrice">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <mat-form-field class="create-form-full-width" appearance="fill">
+                            <mat-label>ราคาค่าส่ง</mat-label>
+                            <input matInput type="text" formControlName="deliveryFee">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <mat-form-field class="create-form-full-width" appearance="fill">
+                            <mat-label>ราคาค่ารวม</mat-label>
+                            <input matInput type="text" formControlName="totalPrice">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <mat-form-field class="create-form-full-width" appearance="fill">
+                            <mat-label>โน๊ต</mat-label>
+                            <input matInput type="text" formControlName="note">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col-9">
+            </div>
+            <div class="col">
+                <div class="button-row">
+                    <button [disabled]="!salesOrderForm.valid" mat-raised-button color="primary" type="submit">
+                        สร้างออเดอร์
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

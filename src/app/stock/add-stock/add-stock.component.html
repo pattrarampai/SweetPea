@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-6">       
+        <h1 mat-dialog-title>รับดอกไม้เข้าสต๊อก</h1>    
+    </div>
+    <div class="col-6" align="end">
+        <button mat-raised-button color="primary" (click)="addRow()"><mat-icon>add</mat-icon></button>
+    </div>
+</div>
+
+<form fxLayout=column [formGroup]="formAddStock" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+        <div formArrayName="stockInfo">
+            <div *ngFor="let data of arr; let i=index">
+                <div [formGroupName]="i">
+                    <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+                        <mat-form-field fxFlex="20%">
+                            <mat-select placeholder="ชื่อดอกไม้" type="text" formControlName="flower" (selectionChange)="flowerChange(i)">
+                                <mat-option *ngFor="let flower of flowers" [value]="flower">
+                                    {{flower.flowerName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+        
+                        <mat-form-field fxFlex="10%">
+                            <input matInput type="number" placeholder="จำนวน" formControlName="quantity">
+                        </mat-form-field>
+        
+                        <mat-form-field fxFlex="5%">
+                            <input [readonly]=true matInput type="text" placeholder="หน่วยนับ" formControlName="unit">
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="15%">
+                            <input matInput [matDatepicker]="datepicker1" placeholder="ล๊อต" formControlName="lot">
+                                <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
+                                <mat-datepicker #datepicker1>
+                                </mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="10%">
+                            <input matInput type="text" placeholder="ราคา" formControlName="price">
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="20%">
+                            <mat-select placeholder="สถานที่" type="text" formControlName="florist">
+                                <mat-option *ngFor="let florist of florists" [value]="florist">
+                                    {{florist.locationName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        
+                        <button (click)="removeRow(i)" mat-button color="warn">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button type="submit" [disabled]="!formAddStock.valid" color="primary">บันทึก</button>
+        <button mat-raised-button type="button" (click)="closeDialog()" color="warn">ยกเลิก</button>
+    </div>
+</form>

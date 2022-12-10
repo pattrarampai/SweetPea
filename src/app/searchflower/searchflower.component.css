@@ -1,0 +1,68 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.main-div{
+  min-width: 150px;
+  max-width: 900px;
+  width: 100%;
+  margin-left: 180px;
+}
+
+
+.searchResult .table {
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.mat-table {
+  max-width: 900px;
+  width: 100%;
+  margin: 20px auto;
+  }
+
+  .mat-paginator {
+    max-width: 900px;
+    width: 100%;
+    margin: 20px auto;
+    }
+
+  body {
+    font-family: 'Kanit', sans-serif;
+    margin: 0;
+    padding: 30px;
+  }
+  
+  .version-info {
+    font-size: 8pt;
+    float: right;
+    margin: 8px;
+  }
+
+  .mat-card {
+    max-width: 900px;
+    width: 100%;
+    margin: 20px auto;
+  }
+  
+  .mat-form-field {
+    margin: 0px auto;
+  }
+
+  .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+  .mat-input {
+    margin: 10px auto;
+  }
+
+  .mat-stroked-button {
+    margin-left: 0px;
+    
+  }

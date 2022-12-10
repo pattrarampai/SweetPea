@@ -1,0 +1,36 @@
+.create-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.create-form-width {
+    width: 100%;
+}
+
+td {
+    padding-right: 8px;
+}
+
+::ng-deep .mat-grid-tile.create-content .mat-figure {
+    justify-content: flex-start !important ;
+    align-items: flex-start !important;
+}
+
+.date-picker-form-fill {
+    margin-right: 20px;
+}
+
+mat-form-field {
+    width: 200px;
+}
+
+.button-row {
+    display: table-cell;
+    width: 490px;
+}
+
+.round {
+    border: 1px solid black;
+    border-radius: 8px;
+}
