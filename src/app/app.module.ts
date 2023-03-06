@@ -49,6 +49,9 @@ import { SaleReportSummaryComponent } from './report/saleReportSummary.component
 import { ChartsModule } from 'ng2-charts';
 import { StockReportComponent } from './stockReport/stockReport.component';
 import { PromotionReportComponent } from './promotionReport/promotionReport.component';
+import { CreatePurchaseorderComponent } from './create-purchaseorder/create-purchaseorder.component';
+import { PurchaseorderComponent } from './purchaseorder/purchaseorder.component';
+import { EditPurchaseOrderComponent } from './purchaseorder/edit-purchase-order/edit-purchase-order.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +76,10 @@ import { PromotionReportComponent } from './promotionReport/promotionReport.comp
     SaleReportComponent,
     SaleReportSummaryComponent,
     StockReportComponent,
-    PromotionReportComponent
+    PromotionReportComponent,
+    CreatePurchaseorderComponent,
+    PurchaseorderComponent,
+    EditPurchaseOrderComponent
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,9 @@ import { SaleReportComponent } from './report/saleReport.component';
 import { SaleReportSummaryComponent } from './report/saleReportSummary.component';
 import { StockReportComponent } from './stockReport/stockReport.component';
 import { PromotionReportComponent } from './promotionReport/promotionReport.component';
+import { CreatePurchaseorderComponent } from './create-purchaseorder/create-purchaseorder.component';
+import { PurchaseorderComponent } from './purchaseorder/purchaseorder.component';
+
 
 const routes: Routes = [
   {
@@ -134,6 +137,28 @@ const routes: Routes = [
       {
         path: 'promotionReport',
         component: PromotionReportComponent
+      }
+    ]
+  },
+  {
+    path: '',
+    component: HomeLayoutComponent, 
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'createPurchaseorder',
+        component: CreatePurchaseorderComponent
+      }
+    ]
+  },
+  {
+    path: '',
+    component: HomeLayoutComponent, 
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'purchaseorder',
+        component: PurchaseorderComponent
       }
     ]
   }

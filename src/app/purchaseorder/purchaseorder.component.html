@@ -1,0 +1,100 @@
+<mat-grid-list cols="12" rowHeight="100px">
+    <mat-grid-tile colspan="2">ข้อมูลใบสั่งซื้อ ({{numberOfOrder}})</mat-grid-tile>
+    <mat-grid-tile colspan="8"></mat-grid-tile>
+    <mat-grid-tile colspan="2">
+        <div class="button-row">
+            <button mat-raised-button color="primary" routerLinkActive="active" routerLink="/createPurchaseorder">
+                สร้างใบสั่งซื้อ
+            </button>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
+<form [formGroup]="POForm" (ngSubmit)="search()">  
+<div class="container">
+    <div class="main-div">
+    
+            <mat-form-field appearance="fill">
+                <mat-label>วันที่เริ่ม</mat-label>
+                <input matInput [matDatepicker]="startDate" formControlName ="startDate">
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+              <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+            <!-- <mat-form-field>
+                <mat-label>ค้นหา</mat-label>
+                <input matInput [formControl]="searchFilter" placeholder="ค้นหา" #input>
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field> -->
+
+
+            <mat-form-field appearance="fill">
+                <mat-label>วันที่สิ้นสุด</mat-label>
+                <input matInput [matDatepicker]="endDate" formControlName ="endDate">
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+              <mat-datepicker #endDate></mat-datepicker>
+            </mat-form-field>
+    <br>
+    <button mat-stroked-button type="submit">Search </button>
+    <br>
+</div>
+    <div class="row scroll-bar">
+        <div class="col-1">
+        </div>
+        <div class="col-10 ">
+            <table mat-table [dataSource]="dataSource">
+
+                <!-- No. Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                <!-- ReceiverDateTime Column -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> สถานะ </th>
+                    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                </ng-container>
+
+                <!-- DeliveryDateTime Column -->
+                <ng-container matColumnDef="deliveryDateTime">
+                    <th mat-header-cell *matHeaderCellDef> วันที่สร้าง </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date | date:'yyyy-MM-dd'}} </td>
+                </ng-container>
+
+            
+
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="selectEdit">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let row">
+                        <!-- <button mat-raised-button 
+                            color="primary" 
+                            (click)="onEdit(row)" 
+                            routerLinkActive="active" 
+                            routerLink="/editSalesorder"
+                            >Edit
+                            </button> -->
+                        <button mat-raised-button color="primary" (click)="openDialog(row)">
+                            <mat-icon aria-hidden="false">edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                 <!-- Checkbox Column -->
+                 <ng-container matColumnDef="selectDel">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-raised-button color="warn" (click)="deleteSalesorder(row)">
+                            <mat-icon aria-hidden="false">clear</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </table>
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+</div>
+</form>

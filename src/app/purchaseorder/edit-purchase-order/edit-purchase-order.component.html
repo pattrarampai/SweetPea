@@ -1,0 +1,8 @@
+<form [formGroup]="purchaseOrderForm" (ngSubmit)="onUpdate()">
+    <h1 mat-dialog-title>แก้ไขข้อมูลใบสั่งซื้อ {{data.id}}</h1>
+
+
+    <div mat-dialog-actions align="end">
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial type="submit">บันทึกออเดอร์</button>
+    </div>
+</form>

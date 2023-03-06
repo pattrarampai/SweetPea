@@ -1,0 +1,37 @@
+<mat-grid-list cols="12" rowHeight="100px">
+    <mat-grid-tile colspan="2">สร้างใบสั่งซื้อ</mat-grid-tile>
+    <mat-grid-tile colspan="10"></mat-grid-tile>
+</mat-grid-list>
+
+<form [formGroup]="createPurchaseorder" (ngSubmit)="onSubmit()">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-3">
+                <mat-form-field appearance="fill" class="date-picker-form-fill">
+                    <mat-label>วันที่สั่งซื้อ</mat-label>
+                    <input matInput [matDatepicker]="datepicker2" placeholder="yyyy-mm-dd" type="text"
+                        formControlName="date" (dateChange)="receiveDateChange()">
+                    <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker2>
+                        <mat-datepicker-actions>
+                            <button mat-button matDatepickerCancel>Cancel</button>
+                            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                        </mat-datepicker-actions>
+                    </mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col-3">
+                <mat-form-field class="create-form-full-width" appearance="fill">
+                    <mat-label>จำนวนทั้งหมด</mat-label>
+                    <input matInput type="text" formControlName="date">
+                </mat-form-field>
+            </div>
+            <div class="col-3">
+                <mat-form-field class="create-form-full-width" appearance="fill">
+                    <mat-label>ค่าขนส่ง</mat-label>
+                    <input matInput type="text" formControlName="date">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</form>

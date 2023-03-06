@@ -23,6 +23,8 @@ import { PriceOfOrders } from '../interface/priceOfOrders';
 import { Configurations } from '../interface/configurations';
 import { FloristFee } from '../interface/floristFee';
 import { FloristDeliveryFee } from '../interface/floristDeliveryFee';
+import { PurchaseOrderDetailListDto } from '../interface/purchase-order-detail-list';
+import { PurchaseOrderDetail } from '../interface/purchase-order-detail';
 
 @Injectable({
   providedIn: 'root'
@@ -595,6 +597,50 @@ export class RestApiService {
       retry(1),
       catchError(this.handleError)
     )
+  }
+
+  getListPurchaseOrder(startDate: any , endDate: any): Observable<PurchaseOrderDetailListDto[]> {
+    let params = new HttpParams;
+    if(startDate == '')
+    {
+      params = params.append('startDate', "");
+    }
+    else
+    {
+    params = params.append('startDate', this.datepipe.transform(startDate, 'yyyy-MM-dd') + "");
+
+      // params = params.append('startDate', this.datepipe.transform(startDate, 'yy-MM-dd') + "");
+    }
+    if(endDate == '')
+    {
+      params = params.append('endDate', "");
+    }
+    else
+    {
+    //  params = params.append('startDate', this.datepipe.transform(startDate, 'yy-MM-dd') + "");
+
+     params = params.append('endDate', this.datepipe.transform(endDate, 'yyyy-MM-dd') + "");
+    }
+    return this.http.get<PurchaseOrderDetailListDto[]>(this.apiURL + '/purchase-order/search', {params: params
+  })
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  updatePurchaseOrder(purchaseorder: PurchaseOrderDetail) {
+    this.http.post(this.apiURL + '/purchase-order/edit', purchaseorder).subscribe(
+      (val) => {
+        console.log("POST call successful value returned in body",
+          val);
+      },
+      response => {
+        console.log("POST call in error", response);
+      },
+      () => {
+        console.log("The POST observable is now completed.");
+      });
   }
 
   handleError(error: HttpErrorResponse) {
